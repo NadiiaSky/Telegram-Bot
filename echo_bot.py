@@ -18,18 +18,12 @@ MALE = "Чоловік"
 FEMALE = "Жінка"
 
 
-
 class User:
     def __init__(self):
         self.name = None
         self.age = None
         self.gender = None
 
-    # @property
-    # def set_name(self):
-    #     return self.name
-
-    # @set_name.setter
     def set_name(self, name):
         if 2 <= len(name) <= 20:
             self.name = name
