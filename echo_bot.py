@@ -1,8 +1,9 @@
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot("1611700876:AAHimV4W1CEvMrwlL95bJr_qpiW3XkXYXvI")  # You can set parse_mode by
-# default. HTML or MARKDOWN
+API_TOKEN = "1620837538:AAE4OQyH00cG1ni7TZ5yaabFU73MGgqDzCQ"
+
+bot = telebot.TeleBot(API_TOKEN)
 
 user_dict = {}
 
@@ -118,6 +119,9 @@ def choose_action(message):
         markup.add(CHANGE_NAME_TEXT, CHANGE_AGE_TEXT, CHANGE_GENDER_TEXT, BACK_TEXT)
         msg = bot.send_message(message.chat.id, 'Обери функцію', reply_markup=markup)
         bot.register_next_step_handler(msg, edit_action)
+    else:
+        msg = bot.send_message(message.chat.id, 'Потрібно обрати з існуючих функцій')
+        bot.register_next_step_handler(msg, choose_action)
 
 
 def edit_action(message):
@@ -138,6 +142,9 @@ def edit_action(message):
         markup.add(INFO_TEXT, SETTINGS_TEXT)
         msg = bot.reply_to(message, 'Обери пункт меню', reply_markup=markup)
         bot.register_next_step_handler(msg, choose_action)
+    else:
+        msg = bot.send_message(message.chat.id, 'Потрібно обрати пункт з наведених')
+        bot.register_next_step_handler(msg, edit_action)
 
 
 def edit_name(message):
